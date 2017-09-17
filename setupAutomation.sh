@@ -1,4 +1,5 @@
 #!/bin/sh
+source ./xcode_installation.sh
 
 #echo "This script will do the required setup to run the automation"
 # echo "do you want to continue? (y/n)"
@@ -6,14 +7,11 @@
 # echo "you entered $continue"
 
 
-#########################################
-# xcode command line tools
-#########################################
-echo "checking for xcode command line tools"
-if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
-   test -d "${xpath}" && test -x "${xpath}" ; then
-  echo "xcode command line tools are already installed"
+
+if check_xcode_installation; then
+  echo "xcode command line tools are already is installed $(type xcode-select)"
 else
-  echo "xcode command line tools not installed, installing";
-  xcode-select --install
+  echo "xcode command line tools are not installed, installing it...."
+  install_xcode
 fi
+
