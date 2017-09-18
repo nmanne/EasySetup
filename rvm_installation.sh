@@ -48,6 +48,7 @@ function is_ruby_installed() {
 }
 
 function is_ruby_version_installed() {
+  echo "verifying whether the ruby version $RUBY_INSTALL_VERSION is installed or not"
   required_ruby_version=$(echo $RUBY_INSTALL_VERSION | tr -d ' .-')
   existing_versions=$(echo $(rvm list) | tr -d ' .-')
   if [[ "$existing_versions"==*"$required_ruby_version"* ]]; then
@@ -68,10 +69,12 @@ function is_correct_ruby_version_in_use() {
 }
 
 function install_ruby() {
+  echo "installing Ruby $RUBY_INSTALL_VERSION"
   rvm install $RUBY_INSTALL_VERSION
 }
 
 function use_correct_ruby_version() {
+  echo "setting the $RUBY_INSTALL_VERSION to use as default ruby version"
   rvm use $RUBY_INSTALL_VERSION
 }
 
