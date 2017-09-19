@@ -1,5 +1,6 @@
 #!/bin/sh
 source ./xcode_installation.sh
+source ./rvm_installation.sh
 
 #echo "This script will do the required setup to run the automation"
 # echo "do you want to continue? (y/n)"
@@ -15,3 +16,18 @@ else
   install_xcode
 fi
 
+if check_rvm_installation; then
+  echo "RVM is already installed"
+  if ! is_rvm_path_setup_in_profile; then
+  	setup_rvm_path_in_profile
+  fi
+else
+  echo "RVM is not installed, instaiing it..."
+  install_rvm
+  if check_rvm_installation; then
+     echo "RVM installation is successful..."
+  else
+     echo "RVM installation is not successful.."
+     exit 1
+  fi
+fi   
