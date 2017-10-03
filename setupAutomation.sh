@@ -1,4 +1,6 @@
 #!/bin/sh
+RUBY_INSTALL_VERSION="ruby-2.0.0-p648"
+
 source ./xcode_installation.sh
 source ./rvm_installation.sh
 
@@ -30,4 +32,6 @@ else
      echo "RVM installation is not successful.."
      exit 1
   fi
-fi   
+fi
+
+make_sure_ruby_is_setup
