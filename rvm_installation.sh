@@ -51,7 +51,7 @@ function is_ruby_version_installed() {
   echo "verifying whether the ruby version $RUBY_INSTALL_VERSION is installed or not"
   required_ruby_version=$(echo $RUBY_INSTALL_VERSION | tr -d ' .-')
   existing_versions=$(echo $(rvm list) | tr -d ' .-')
-  if [[ "$existing_versions"==*"$required_ruby_version"* ]]; then
+  if [[ "$existing_versions" == *"$required_ruby_version"* ]]; then
     return 0
   else
     return 1
@@ -61,7 +61,7 @@ function is_ruby_version_installed() {
 function is_correct_ruby_version_in_use() {
   required_ruby_version=$(echo $RUBY_INSTALL_VERSION | tr -d ' .-')
   current_ruby_version=$(echo $(ruby --version) | tr -d ' .-')
-  if [[ "$current_ruby_version"==*"$required_ruby_version"* ]]; then
+  if [[ "$current_ruby_version" == *"$required_ruby_version"* ]]; then
     return 0
   else
     return 1
