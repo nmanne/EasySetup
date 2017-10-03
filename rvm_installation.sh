@@ -78,6 +78,12 @@ function use_correct_ruby_version() {
   rvm use $RUBY_INSTALL_VERSION
 }
 
+function update_ruby_gems() {
+  echo "updating ruby gems..."
+  gem update --system $RUBY_GEMS_VERSION
+}
+
+
 function install_ruby_and_use_the_version() {
   install_ruby
   if !is_ruby_version_installed; then
@@ -85,6 +91,7 @@ function install_ruby_and_use_the_version() {
     exit 1
   fi
   use_correct_ruby_version
+  update_ruby_gems
 }
 
 function make_sure_ruby_is_setup() {
