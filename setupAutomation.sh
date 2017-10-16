@@ -1,6 +1,5 @@
 #!/bin/sh
 RUBY_INSTALL_VERSION="ruby-2.0.0-p648"
-RUBY_GEMS_VERSION="2.1.11"
 
 source ./xcode_installation.sh
 source ./rvm_installation.sh

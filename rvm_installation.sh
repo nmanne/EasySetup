@@ -80,7 +80,10 @@ function use_correct_ruby_version() {
 
 function update_ruby_gems() {
   echo "updating ruby gems..."
-  gem update --system $RUBY_GEMS_VERSION
+  if !gem update --system; then
+    echo "rubyGems installation is not successful"
+    exit 1
+  fi
 }
 
 
