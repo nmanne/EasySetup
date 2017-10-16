@@ -80,7 +80,7 @@ function use_correct_ruby_version() {
 
 function update_ruby_gems() {
   echo "updating ruby gems..."
-  if !gem update --system; then
+  if ! gem update --system; then
     echo "rubyGems installation is not successful"
     exit 1
   fi
@@ -89,12 +89,11 @@ function update_ruby_gems() {
 
 function install_ruby_and_use_the_version() {
   install_ruby
-  if !is_ruby_version_installed; then
+  if ! is_ruby_version_installed; then
     echo "failed to install ruby version $RUBY_INSTALL_VERSION"
     exit 1
   fi
   use_correct_ruby_version
-  update_ruby_gems
 }
 
 function make_sure_ruby_is_setup() {
@@ -112,6 +111,7 @@ function make_sure_ruby_is_setup() {
     install_ruby_and_use_the_version
   fi
 
+  update_ruby_gems
 
   #  required_ruby_version=$(echo $RUBY_INSTALL_VERSION | tr -d ' .-')
   #  actual_ruby_version=$(echo $RUBY_VERSION | tr -d ' .-')
