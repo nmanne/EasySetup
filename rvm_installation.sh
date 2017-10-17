@@ -96,6 +96,36 @@ function install_ruby_and_use_the_version() {
   use_correct_ruby_version
 }
 
+function install_bundler() {
+  echo "installing bundler..."
+  if ! gem install bundler -f -v $BUNDLER_VERSION; then
+    echo "Failed to install bundler..."
+    return 1
+  fi
+  echo "bundler installation is successful......."
+  return 0
+}
+
+function reinstall_ruby() {
+  echo "Reinstalling ruby $RUBY_INSTALL_VERSION"
+  if rvm remove $RUBY_INSTALL_VERSION; then
+    if rvm install $RUBY_INSTALL_VERSION; then
+      echo "Ruby $RUBY_INSTALL_VERSION reinstallation is successful"
+      return 0
+    fi
+  fi
+  echo "Ruby $RUBY_INSTALL_VERSION reinstallation failed."
+  return 1
+}
+
+function check_bundler_installation() {
+  if $(gem list -i "bundler"); then
+    return 0
+  else
+    return 1
+  fi
+}
+
 function make_sure_ruby_is_setup() {
   if is_ruby_installed; then
     if is_ruby_version_installed; then

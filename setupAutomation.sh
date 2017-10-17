@@ -1,5 +1,6 @@
 #!/bin/sh
 RUBY_INSTALL_VERSION="ruby-2.0.0-p648"
+BUNDLER_VERSION="1.11.2"
 
 source ./xcode_installation.sh
 source ./rvm_installation.sh
@@ -35,3 +36,13 @@ else
 fi
 
 make_sure_ruby_is_setup
+
+if ! install_bundler; then
+  if reinstall_ruby; then
+    install_bundler
+  fi
+fi
+
+if ! check_bundler_installation; then
+  echo "Bundler installation is failed, exit setup process....."
+fi
