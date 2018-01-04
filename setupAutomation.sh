@@ -35,6 +35,11 @@ else
   fi
 fi
 
+if [[ -z $BUNDLE_GEMFILE ]]; then
+  echo "BUNDLE_GEMFILE not set to gemfile "
+  export BUNDLE_GEMFILE=/Users/naveenmanne/EasySetup/Gemfile_Ruby20
+fi
+
 make_sure_ruby_is_setup
 
 if ! install_bundler; then
@@ -44,5 +49,5 @@ if ! install_bundler; then
 fi
 
 if ! check_bundler_installation; then
-  echo "Bundler installation is failed, exit setup process....."
+    echo "Bundler installation is failed, exit setup process....."
 fi

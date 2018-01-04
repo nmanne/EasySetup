@@ -25,11 +25,14 @@ function is_rvm_path_setup_in_profile() {
 }
 
 function setup_rvm_path_in_profile() {
-	echo "setting-up RVM path in profile"
-	if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-		echo '. $HOME/.rvm/scripts/rvm # Load RVM function' >> ~/.bash_profile
-		source ~/.bash_profile
-	fi
+  echo "setting-up RVM path in profile"
+  if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+    echo ">>>>>> $HOME/.rvm/scripts/rvm exists"
+    { echo '#!/bin/bash'; cat ~/.bash_profile; } > ~/temp.txt
+    { cat ~/temp.txt; echo '$HOME/.rvm/scripts/rvm # Load RVM function'; } > ~/.bash_profile
+    source ~/.bash_profile
+    echo ">>>>> source ~/.bash_profile"
+  fi  
 }
 
 function install_rvm() {
