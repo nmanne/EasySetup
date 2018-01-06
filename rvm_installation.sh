@@ -2,7 +2,7 @@
 
 function check_rvm_installation() {
    echo "===> checking rvm installation "
-   if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+   if [[ -s "$HOME/.rvm/scripts/rvm" || -s $HOME/.rvm/bin/rvm ]]; then
    	  return 0
      # result=$( type ~/.rvm/scripts/rvm | head -1 )
 #      echo "$result"
@@ -30,6 +30,14 @@ function setup_rvm_path_in_profile() {
     echo ">>>>>> $HOME/.rvm/scripts/rvm exists"
     { echo '#!/bin/bash'; cat ~/.bash_profile; } > ~/temp.txt
     { cat ~/temp.txt; echo '$HOME/.rvm/scripts/rvm # Load RVM function'; } > ~/.bash_profile
+    source ~/.bash_profile
+    echo ">>>>> source ~/.bash_profile"
+  fi
+
+  if [[ -s "$HOME/.rvm/bin/rvm" ]]; then
+    echo ">>>>>> $HOME/.rvm/bin/rvm exists"
+    { echo '#!/bin/bash'; cat ~/.bash_profile; } > ~/temp.txt
+    { cat ~/temp.txt; echo '$HOME/.rvm/bin/rvm # Load RVM function'; } > ~/.bash_profile
     source ~/.bash_profile
     echo ">>>>> source ~/.bash_profile"
   fi  

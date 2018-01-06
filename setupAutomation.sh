@@ -10,8 +10,17 @@ source ./rvm_installation.sh
 # read continue
 # echo "you entered $continue"
 
+if [[ -z $CUCUMBER_FOLDER ]]; then
+  echo "CUCUMBER_FOLDER not set"
+  return 1
+fi
 
+if [ ! -f $CUCUMBER_FOLDER/Gemfile_Ruby20 ]; then
+  echo “could not find the Gemfile_Ruby20 file”
+  return 1
+fi
 
+echo ‘———— Checking Xcode —————’
 if check_xcode_installation; then
   echo "xcode command line tools are already is installed $(type xcode-select)"
 else
@@ -19,12 +28,8 @@ else
   install_xcode
 fi
 
-if check_rvm_installation; then
-  echo "RVM is already installed"
-  if ! is_rvm_path_setup_in_profile; then
-  	setup_rvm_path_in_profile
-  fi
-else
+echo ‘———— Checking RVM installation ————’
+if ! check_rvm_installation; then
   echo "RVM is not installed, instaiing it..."
   install_rvm
   if check_rvm_installation; then
@@ -33,15 +38,14 @@ else
      echo "RVM installation is not successful.."
      exit 1
   fi
+else
+  echo “RVM is already installed, moving to next step…”
 fi
 
-if [[ -z $BUNDLE_GEMFILE ]]; then
-  echo "BUNDLE_GEMFILE not set to gemfile "
-  export BUNDLE_GEMFILE=/Users/naveenmanne/EasySetup/Gemfile_Ruby20
-fi
 
 make_sure_ruby_is_setup
 
+echo ‘———— Checking Bundler ————’
 if ! install_bundler; then
   if reinstall_ruby; then
     install_bundler
