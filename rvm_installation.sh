@@ -147,12 +147,12 @@ function make_sure_ruby_is_setup() {
       fi
     else
       install_ruby_and_use_the_version
+      update_ruby_gems
     fi
   else
     install_ruby_and_use_the_version
+    update_ruby_gems
   fi
-
-  update_ruby_gems
 
   #  required_ruby_version=$(echo $RUBY_INSTALL_VERSION | tr -d ' .-')
   #  actual_ruby_version=$(echo $RUBY_VERSION | tr -d ' .-')

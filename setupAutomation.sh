@@ -46,12 +46,16 @@ fi
 make_sure_ruby_is_setup
 
 echo ‘———— Checking Bundler ————’
-if ! install_bundler; then
-  if reinstall_ruby; then
-    install_bundler
+if ! check_bundler_installation; then
+  if ! install_bundler; then
+    if reinstall_ruby; then
+      install_bundler
+    fi
   fi
 fi
 
 if ! check_bundler_installation; then
     echo "Bundler installation is failed, exit setup process....."
 fi
+
+
