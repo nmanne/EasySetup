@@ -58,4 +58,7 @@ if ! check_bundler_installation; then
     echo "Bundler installation is failed, exit setup process....."
 fi
 
+cd $CUCUMBER_FOLDER
+
+bundle install --without ie database debug screenshot code_metrics network_traffic faraday 
 
